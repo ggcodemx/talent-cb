@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+
+@theme {
+    --color-primary: #E31D19;
+    --color-secondary: #CC1517;
+    --light-dusty-pink: #F7E2E5;
+    --very-pale-blush: #FBEFF1;
+    --light-neutral-gray: #D7D7D7;
+    --pure-black: #000000;
+    --pure-white: #FFFFFF;
+    --main-font-size: 20px;
+
+}
+
+@layer base {
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+}
+
+@layer components {
+  .page-padding {
+    @apply px-6 md:px-12 lg:px-[90px];
+  }
+}
+
+body{
+    font-family: var(--font-manrope), sans-serif;
+    color: var(--pure-black);
+    font-size: var(--main-font-size);
+}
+
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 0.8s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
