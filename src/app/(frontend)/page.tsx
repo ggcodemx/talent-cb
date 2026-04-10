@@ -9,18 +9,16 @@ import './styles.css'
 import Hero from '@/components/Hero'
 import NewsSection from '@/components/NewsHomeSection'
 
-
 async function getData() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
-  const homeData = await payload.findGlobal({ slug: 'home-page' })
+  //const homeData = await payload.findGlobal({ slug: 'home-page' })
 
-  return { homeData }
+  //return { homeData }
 }
 
-
 export default async function HomePage() {
-  const { homeData } = await getData();
+  // const { homeData } = await getData();
   const headers = await getHeaders()
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })

@@ -10,10 +10,9 @@ import { Media } from './collections/Media'
 
 // ── Globales (contenido único: header, footer, ajustes) ──────
 import { SiteSettings } from './globals/SiteSettings'
-import { HomePage } from './globals/HomePage'
 import { ContactPage } from './globals/ContactPage'
 import { AboutPage } from './globals/AboutPage'
-import { HeroGlobal} from './globals/Hero'
+import { HeroGlobal } from './globals/Hero'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -27,13 +26,7 @@ export default buildConfig({
   },
   collections: [Users, Media],
   // ── Globales registrados ────────────────────────────────────
-  globals: [
-    SiteSettings,
-    HomePage,
-    ContactPage,
-    AboutPage,
-    HeroGlobal,
-  ],
+  globals: [HeroGlobal],
 
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

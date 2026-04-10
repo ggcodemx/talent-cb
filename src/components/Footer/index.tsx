@@ -60,15 +60,13 @@ const Footer = () => {
   return (
     <footer className="bg-primary rounded-t-3xl mt-60">
       <div className="page-padding py-14">
-
         {/* Grid principal */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-
           {/* Logo + descripción */}
           <div className="flex flex-col gap-4">
             <Link href="/">
               <Image
-                src="/api/media/file/logo_blanco.png"
+                src="/api/media/file/CB_Tax_Logotipo_blanco.png"
                 alt="CB Tax Logo"
                 width={130}
                 height={40}
@@ -76,8 +74,8 @@ const Footer = () => {
               />
             </Link>
             <p className="text-white text-sm leading-relaxed">
-              Liderando el futuro de la consultoría fiscal con integridad,
-              innovación y compromiso social.
+              Liderando el futuro de la consultoría fiscal con integridad, innovación y compromiso
+              social.
             </p>
           </div>
 
@@ -100,30 +98,25 @@ const Footer = () => {
             </div>
           ))}
 
-          
-{/* Redes sociales */}
-<div className="flex flex-col gap-4">
-  <h4 className="text-white font-semibold text-sm">Síguenos en</h4>
-  <div className="flex items-center gap-3">
-    {socialLinks.map((social) => (
-  <a
-    key={social.label}
-    href={social.href}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label={social.label}
-    className="w-9 h-9 rounded-full bg-white flex items-center justify-center text-primary hover:bg-white/90 transition-colors duration-200"
-  >
-    {social.icon}
-  </a>
-))}
-  </div>
-</div>
-
+          {/* Redes sociales */}
+          <div className="flex flex-col gap-4">
+            <h4 className="text-white font-semibold text-sm">Síguenos en</h4>
+            <div className="flex items-center gap-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="w-9 h-9 rounded-full bg-white flex items-center justify-center text-primary hover:bg-white/90 transition-colors duration-200"
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-
-        
-        
 
         {/* Separador */}
         <div className="border-t border-white mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -137,7 +130,6 @@ const Footer = () => {
             Aviso de privacidad
           </Link>
         </div>
-
       </div>
     </footer>
   )
