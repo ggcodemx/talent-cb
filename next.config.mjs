@@ -12,6 +12,20 @@ const nextConfig = {
 
     return webpackConfig
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
 }
+
+console.log('--- DEBUG DE VARIABLES ---')
+console.log('MONGODB_URI:', process.env.MONGODB_URI)
+console.log('--------------------------')
 
 export default withPayload(nextConfig, { devBundleServerPackages: false })

@@ -1,15 +1,25 @@
 import type { GlobalConfig } from 'payload'
 
-export const HeroGlobal: GlobalConfig = {
-  slug: 'hero',
-  label: 'Hero Principal',
+export const FeaturedSectionGlobal: GlobalConfig = {
+  slug: 'featured-section',
+  label: 'Sección Destacada',
   fields: [
     {
-      name: 'slides',
+      name: 'titulo',
+      type: 'text',
+      label: 'Título',
+      defaultValue: 'Más sobre CB Tax',
+    },
+    {
+      name: 'descripcion',
+      type: 'textarea',
+      label: 'Descripción',
+    },
+    {
+      name: 'tarjetas',
       type: 'array',
-      label: 'Slides',
+      label: 'Tarjetas',
       minRows: 1,
-      maxRows: 4,
       fields: [
         {
           name: 'titulo',
@@ -18,24 +28,26 @@ export const HeroGlobal: GlobalConfig = {
           required: true,
         },
         {
-          name: 'subtitulo',
-          type: 'text',
-          label: 'Subtítulo',
+          name: 'descripcion',
+          type: 'textarea',
+          label: 'Descripción',
         },
         {
           name: 'botonTexto',
           type: 'text',
           label: 'Texto del botón',
+          defaultValue: 'Leer más',
         },
         {
           name: 'botonUrl',
           type: 'text',
           label: 'URL del botón',
+          required: true,
         },
         {
-          name: 'imagenFondo',
+          name: 'imagen',
           type: 'upload',
-          label: 'Imagen de fondo',
+          label: 'Imagen',
           relationTo: 'media',
           required: true,
         },

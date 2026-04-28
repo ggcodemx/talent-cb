@@ -17,7 +17,7 @@ const news: NewsItem[] = [
     titulo: 'Nuevas regulaciones T-MEC para 2026: ¿Qué esperar?',
     descripcion:
       'Un vistazo detallado a las actualizaciones normativas que transformarán la producción regional y los requisitos de cumplimiento fiscal para el sector.',
-    imagen: '/api/media/file/fondo.jpg',
+    imagen: '/api/media/file/fondo_news.jpg',
     href: '/noticias/regulaciones-tmec-2026',
     destacada: true,
   },
@@ -88,7 +88,7 @@ const NewsSection = () => {
                   </p>
                 )}
 
-                <span className="inline-flex items-center gap-2 text-white text-sm font-medium border border-white/30 px-4 py-2 rounded-full hover:bg-white hover:text-black transition-colors w-[120px] ">
+                <span className="inline-flex items-center gap-2 text-white text-sm font-medium border border-white/30 px-4 py-2 rounded-full hover:bg-white hover:text-black transition-colors w-[125px] ">
                   Leer más{' '}
                   <svg
                     width="18" // Tamaño ligeramente ajustado
@@ -111,7 +111,7 @@ const NewsSection = () => {
           )}
 
           {/* Noticias secundarias */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-10">
             {secundarias.map((item) => (
               <Link
                 key={item.href}

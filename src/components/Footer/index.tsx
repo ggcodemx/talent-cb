@@ -58,7 +58,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-primary rounded-t-3xl mt-60">
+    <footer className="relative bg-primary rounded-t-3xl mt-[-20px] z-10">
       <div className="page-padding py-14">
         {/* Grid principal */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">

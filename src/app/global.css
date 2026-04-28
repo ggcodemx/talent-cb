@@ -2,11 +2,11 @@
 
 
 @theme {
-    --color-primary: #E31D19;
-    --color-secondary: #CC1517;
-    --light-dusty-pink: #F7E2E5;
-    --very-pale-blush: #FBEFF1;
-    --light-neutral-gray: #D7D7D7;
+    --color-primary: #08602E;
+    --color-secondary: #058C42;
+    --light-dusty-green: #B9DBC6;
+    --very-pale-green: #CCDDD3;
+    --light-neutral-gray: #EFEFEF;
     --pure-black: #000000;
     --pure-white: #FFFFFF;
     --main-font-size: 20px;
@@ -28,10 +28,20 @@
 }
 
 body{
-    font-family: var(--font-manrope), sans-serif;
-    color: var(--pure-black);
     font-size: var(--main-font-size);
 }
+
+/* Webkit (Chrome, Safari, Edge) */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+ 
+/* Firefox */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+ 
 
 @layer utilities {
   .animate-fadeIn {

@@ -1,23 +1,23 @@
 // src/app/layout.tsx
 import React from 'react'
 import '@/app/global.css'
-import {Manrope} from 'next/font/google'
+import { Outfit } from 'next/font/google'
 
-const manrope = Manrope({
+const outfit = Outfit({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-manrope',
+  variable: '--font-outfit',
 })
 
 export const metadata = {
-  description: 'CB Tax Website',
-  title: 'CB Tax',
+  description: 'CB Talent',
+  title: 'CB Talent',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body suppressHydrationWarning>
+      <body className={outfit.className} suppressHydrationWarning>
         {children}
       </body>
     </html>
