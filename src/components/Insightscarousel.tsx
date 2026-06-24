@@ -192,8 +192,8 @@ interface InsightsCarouselProps {
 }
 
 const InsightsCarousel: React.FC<InsightsCarouselProps> = ({
-  eyebrow = 'Knowledge Capital',
-  title = 'Leadership Insights',
+  eyebrow = 'Capital intelectual',
+  title = 'Perspectivas de liderazgo',
   cards = INSIGHTS,
 }) => {
   const trackRef = useRef<HTMLDivElement>(null)
@@ -215,13 +215,13 @@ const InsightsCarousel: React.FC<InsightsCarouselProps> = ({
   )
 
   return (
-    <section className="w-full bg-white py-16 px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section className="w-full bg-white py-16 page-padding">
+      <div>
         {/* Header row */}
         <div className="flex items-start justify-between mb-10">
           <div>
-            <p className="text-green-700 text-md font-semilight mb-1">{eyebrow}</p>
-            <h2 className="text-gray-900 font-light text-3xl lg:text-4xl">{title}</h2>
+            <p className="text-green-700 text-sm font-light mb-1">{eyebrow}</p>
+            <h2 className="text-gray-900 font-light text-2xl lg:text-3xl">{title}</h2>
           </div>
 
           {/* Arrow controls */}

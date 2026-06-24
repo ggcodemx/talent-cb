@@ -1,121 +1,72 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
+import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-
-export interface DropdownItem {
-  label: string
-  href: string
-}
 
 export interface ExpertiseBlockProps {
   image: {
     url: string
     alt?: string
   }
-  serviceItems: DropdownItem[]
-  industryItems: DropdownItem[]
 }
 
-// ─── Dropdown Menu (Sin cambios, solo para que compile) ───────────────────────
+// ─── Main Component ───────────────────────────────────────────────────────────
 
-interface DropdownMenuProps {
-  label: string
-  items: DropdownItem[]
-}
-
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ label, items }) => {
-  const [open, setOpen] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [])
-
-  return (
-    <div ref={ref} className="relative">
-      <button
-        onClick={() => setOpen(!open)}
-        className={`
-          flex items-center gap-3 px-5 py-3
-          border border-white/60 rounded-xl
-          text-white text-sm font-medium
-          transition-all duration-200
-          hover:bg-white/10 hover:border-white
-          focus:outline-none focus:ring-2 focus:ring-white/40
-          ${open ? 'bg-white/10 border-white' : ''}
-        `}
-      >
-        {label}
-        <svg
-          className={`w-3.5 h-3.5 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2.5}
-        >
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
-      </button>
-
-      <div
-        className={`
-          absolute top-full left-0 mt-3 w-64 z-30
-          bg-white rounded-xl shadow-xl border border-gray-100
-          overflow-hidden
-          transition-all duration-250 origin-top
-          ${open ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-90 pointer-events-none'}
-        `}
-      >
-        {items.map((item, i) => (
-          <a
-            key={i}
-            href={item.href}
-            onClick={() => setOpen(false)}
-            className="flex items-center justify-between px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
-          >
-            <span>{item.label}</span>
-          </a>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-// ─── Main Component (Ajustado a Full Width) ───────────────────────────────────
-
-const ExpertiseBlock: React.FC<ExpertiseBlockProps> = ({ image, serviceItems, industryItems }) => {
+const ExpertiseBlock: React.FC<ExpertiseBlockProps> = ({ image }) => {
   return (
     <section className="w-full bg-white overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[500px]">
-        <div className="bg-primary px-8 py-16 lg:px-20 flex flex-col justify-center">
-          <div className="max-w-xl ml-auto lg:mr-0">
-            <p className="text-white text-md font-semilight mb-4 tracking-wider">
-              Knowledge Capital
+        {/* ── Left: green content panel ── */}
+        <div className="bg-primary pl-6 md:pl-12 lg:pl-[200px] pr-8 md:pr-14 py-16 flex flex-col justify-center">
+          <div className="max-w-xl lg:mr-0">
+            <p className="text-white text-sm font-light mb-4 tracking-wider">
+              Estrategia de Talento
             </p>
 
-            <h2 className="text-white font-light text-4xl lg:text-5xl leading-tight mb-6">
-              How can we empower
+            <h2 className="text-white font-light text-2xl lg:text-4xl leading-tight mb-6">
+              ¿Cómo acompañamos
               <br />
-              your growth?
+              su crecimiento?
             </h2>
 
-            <p className="text-white text-lg leading-relaxed mb-10">
-              Learn more about our core areas of expertise by selecting your topic of interest
-              below.
+            <p className="text-white text-base font-light leading-relaxed mb-10">
+              Conozca a profundidad nuestras áreas de especialización y la estructura de industrias
+              en las que operamos. Cada práctica responde a dinámicas específicas de mercado y
+              desafíos particulares de talento.
             </p>
 
+            {/* Fixed buttons — edita los href aquí si cambian las rutas */}
             <div className="flex flex-wrap gap-4">
-              <DropdownMenu label="Service Expertise" items={serviceItems} />
-              <DropdownMenu label="Global Industries" items={industryItems} />
+              <Link
+                href="/services"
+                className="
+                  flex items-center gap-2 px-6 py-3
+                  border border-white/60 rounded-xl
+                  text-white text-sm font-medium
+                  transition-all duration-200
+                  hover:bg-white/10 hover:border-white
+                  focus:outline-none focus:ring-2 focus:ring-white/40
+                "
+              >
+                Servicios
+              </Link>
+
+              <Link
+                href="/industries"
+                className="
+                  flex items-center gap-2 px-6 py-3
+                  border border-white/60 rounded-xl
+                  text-white text-sm font-medium
+                  transition-all duration-200
+                  hover:bg-white/10 hover:border-white
+                  focus:outline-none focus:ring-2 focus:ring-white/40
+                "
+              >
+                Industrias Globales
+              </Link>
             </div>
           </div>
         </div>

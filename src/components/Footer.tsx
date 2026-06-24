@@ -2,46 +2,46 @@
 
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const NAV_COLUMNS = [
   {
-    title: 'Platform',
+    title: 'Oficinas',
     bold: true,
     links: [
-      { label: 'For Companies', href: '#' },
-      { label: 'For Talent', href: '#' },
-      { label: 'Our Process', href: '#' },
-      { label: 'Case Studies', href: '#' },
+      { label: 'Ciudad de México', href: '#' },
+      { label: 'Monterrey', href: '#' },
+      { label: 'Guadalajara', href: '#' },
     ],
   },
   {
-    title: 'Company',
+    title: 'Servicios ',
     bold: false,
     links: [
-      { label: 'About Us', href: '#' },
-      { label: 'Careers', href: '#' },
-      { label: 'Contact', href: '#' },
-      { label: 'Global Offices', href: '#' },
+      { label: 'Busqueda ejecutiva', href: '#' },
+      { label: 'Estrategia de Talento', href: '#' },
+      { label: 'Evaluación de Liderazgo', href: '#' },
+      { label: 'Gobernanza', href: '#' },
     ],
   },
   {
-    title: 'Company',
+    title: 'CB Talent',
     bold: false,
     links: [
-      { label: 'About Us', href: '#' },
-      { label: 'Careers', href: '#' },
-      { label: 'Contact', href: '#' },
-      { label: 'Global Offices', href: '#' },
+      { label: 'Sobre nosotros', href: '#' },
+      { label: 'Carreras', href: '#' },
+      { label: 'Contacto', href: '#' },
+      { label: 'Oficinas Globales', href: '#' },
     ],
   },
 ]
 
 const LEGAL_LINKS = [
-  { label: 'Privacy Policy', href: '#' },
-  { label: 'Terms of Service', href: '#' },
-  { label: 'Cookie Settings', href: '#' },
+  { label: 'Política de Privacidad', href: '#' },
+  { label: 'Términos de Servicio', href: '#' },
+  { label: 'Configuración de Cookies', href: '#' },
 ]
 
 // ─── Social Icons ─────────────────────────────────────────────────────────────
@@ -89,7 +89,7 @@ const SubscribeForm: React.FC = () => {
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Subscribe"
+        placeholder="Suscríbete con tu correo"
         aria-label="Correo para suscribirse"
         className="flex-1 bg-transparent px-5 py-3 text-sm text-white placeholder-white/60 outline-none min-w-0"
       />
@@ -127,23 +127,18 @@ const SubscribeForm: React.FC = () => {
 const Footer: React.FC = () => {
   return (
     <footer className="bg-green-700 text-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-8">
+      <div className="page-padding pt-16 pb-8">
         {/* ── Top grid ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[220px_1fr_1fr_1fr_280px] gap-10 lg:gap-8 pb-12">
           {/* Col 1 — Brand */}
           <div>
             {/* Logo text — reemplaza con <Image> si tienes el SVG del logo */}
             <div className="flex items-center gap-2 mb-4">
-              <svg viewBox="0 0 40 40" className="w-10 h-10 text-white" fill="currentColor">
-                <rect x="4" y="8" width="6" height="24" rx="1" opacity="0.9" />
-                <rect x="12" y="12" width="6" height="20" rx="1" opacity="0.75" />
-                <rect x="20" y="16" width="6" height="16" rx="1" opacity="0.6" />
-                <rect x="28" y="20" width="6" height="12" rx="1" opacity="0.45" />
-              </svg>
+              <Image src="/api/media/file/logo_blanco.png" alt="Logo" width={100} height={100} />
             </div>
 
             <p className="text-white/75 text-sm leading-relaxed mb-6 max-w-[200px]">
-              Bespoke recruitment for the modern visionary. Global reach, local expertise.
+              Construyendo el liderazgo del futuro.
             </p>
 
             {/* Social links */}
@@ -194,9 +189,9 @@ const Footer: React.FC = () => {
 
           {/* Col 5 — Subscribe */}
           <div>
-            <h4 className="font-bold text-sm mb-2">Subscribe</h4>
+            <h4 className="font-bold text-sm mb-2">Suscríbete</h4>
             <p className="text-white/75 text-sm leading-relaxed">
-              Insights into the future of work.
+              Recibe las últimas actualizaciones y contenido exclusivo.
             </p>
             <SubscribeForm />
           </div>
@@ -207,7 +202,7 @@ const Footer: React.FC = () => {
 
         {/* ── Legal bar ── */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-6">
-          <p className="text-white/60 text-xs">© 2026 CB Tax Internacional. All rights reserved.</p>
+          <p className="text-white/60 text-xs">© 2026 CB Talent. Todos los derechos reservados.</p>
           <div className="flex items-center gap-6">
             {LEGAL_LINKS.map((link) => (
               <Link

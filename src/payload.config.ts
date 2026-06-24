@@ -8,14 +8,18 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Contacto } from './collections/Contacto'
 
 // ── Globales (contenido único: header, footer, ajustes) ──────
 import { NavbarGlobal } from './globals/NavbarGlobal'
-import { HeroGlobal } from './globals/HeroGlobal'
-import { FeaturedSectionGlobal } from './globals/FeaturedSection'
-import { BannerGlobal } from './globals/Banner'
-import { AboutStatsGlobal } from './globals/Aboutstatsglobal'
-import { ExpertiseBlockGlobal } from './globals/Expertiseblockglobal'
+import { HomePageGlobal } from './globals/HomePage'
+import { AboutPageGlobal } from './globals/AboutPage'
+import { ContactPageGlobal } from './globals/ContactPage'
+import { PageIndustriesGlobal } from './globals/PageIndustriesGlobal'
+import { PageServicesGlobal } from './globals/PageServicesGlobal'
+import { BlogPagel } from './globals/BlogPage'
+import { LiderazgoPageGlobal } from './globals/LiderazgoPage'
+import { CareersPageGlobal } from './globals/CareersPage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -31,15 +35,18 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Contacto],
   // ── Globales registrados ────────────────────────────────────
   globals: [
-    HeroGlobal,
-    FeaturedSectionGlobal,
-    BannerGlobal,
     NavbarGlobal,
-    AboutStatsGlobal,
-    ExpertiseBlockGlobal,
+    HomePageGlobal,
+    AboutPageGlobal,
+    ContactPageGlobal,
+    PageIndustriesGlobal,
+    PageServicesGlobal,
+    BlogPagel,
+    LiderazgoPageGlobal,
+    CareersPageGlobal,
   ],
 
   editor: lexicalEditor(),

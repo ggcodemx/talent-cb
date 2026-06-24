@@ -39,12 +39,12 @@ const CtaBanner: React.FC = () => {
       />
 
       {/* ── Content ── */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-6 py-24 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center page-padding py-24 text-center">
         {/* Heading */}
-        <h2 className="text-white font-light text-3xl sm:text-4xl lg:text-6xl leading-tight max-w-3xl mb-10">
-          Optimize your
+        <h2 className="text-white font-light text-2xl lg:text-4xl leading-tight max-w-3xl mb-10">
+          Optimice su
           <br />
-          human capital.
+          capital humano.
         </h2>
 
         {/* Pill form */}
@@ -64,7 +64,7 @@ const CtaBanner: React.FC = () => {
             onChange={(e) => setEmail(e.target.value)}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
-            placeholder="Book Architectural Review"
+            placeholder="Correo electrónico"
             aria-label="Tu correo electrónico"
             className="
               flex-1 px-6 py-4 text-sm text-gray-700 placeholder-gray-500

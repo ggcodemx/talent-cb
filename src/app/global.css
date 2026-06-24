@@ -4,7 +4,7 @@
 @theme {
     --color-primary: #08602E;
     --color-secondary: #058C42;
-    --light-dusty-green: #B9DBC6;
+    --color-light: #B9DBC6;
     --very-pale-green: #CCDDD3;
     --light-neutral-gray: #EFEFEF;
     --pure-black: #000000;
@@ -23,7 +23,7 @@
 
 @layer components {
   .page-padding {
-    @apply px-6 md:px-12 lg:px-[90px];
+    @apply px-6 md:px-12 lg:px-[200px];
   }
 }
 

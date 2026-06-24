@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
+import Image from 'next/image'
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
 interface LinkItem {
   id: string
@@ -11,55 +12,60 @@ interface LinkItem {
   href: string
 }
 
-// ─── Static Data ──────────────────────────────────────────────────────────────
+interface Slide {
+  phrase: string
+  image: string
+}
 
 const LINKS: LinkItem[] = [
   {
     id: '1',
-    title: 'Careers',
+    title: 'Carreras',
     description:
-      'Cras volutpat nunc orci, fringilla rhoncus risus lacinia volutpat. Duis tempor purus sed interdum hendrerit.',
+      'Únase a una firma donde el rigor analítico y la profundidad de relaciones definen nuestra práctica. Buscamos profesionales con perspectiva de largo plazo.',
     href: '#',
   },
   {
     id: '2',
-    title: 'About us',
+    title: 'Sobre nosotros',
     description:
-      'Cras volutpat nunc orci, fringilla rhoncus risus lacinia volutpat. Duis tempor purus sed interdum hendrerit.',
+      'Una firma de búsqueda ejecutiva construida sobre relaciones de largo plazo, resultados verificables y compromiso con cada organización que asesoramos.',
     href: '#',
   },
   {
     id: '3',
-    title: 'Empower',
+    title: ' Nuestro enfoque',
     description:
-      'Cras volutpat nunc orci, fringilla rhoncus risus lacinia volutpat. Duis tempor purus sed interdum hendrerit.',
+      'Metodología probada que integra inteligencia de industria, evaluación integral de liderazgo y seguimiento post-contratación para asegurar integración exitosa.',
     href: '#',
   },
-  {
+  /*  {
     id: '4',
-    title: 'Our Services',
+    title: 'Noticias',
     description:
-      'Cras volutpat nunc orci, fringilla rhoncus risus lacinia volutpat. Duis tempor purus sed interdum hendrerit.',
+      ' Anuncios institucionales, movimientos relevantes de la firma y participación en foros de liderazgo, gobernanza y estrategia de talento.',
     href: '#',
-  },
-  {
-    id: '5',
-    title: 'Global Industries',
-    description:
-      'Cras volutpat nunc orci, fringilla rhoncus risus lacinia volutpat. Duis tempor purus sed interdum hendrerit.',
-    href: '#',
-  },
-  {
-    id: '6',
-    title: 'Leadership Advisory',
-    description:
-      'Cras volutpat nunc orci, fringilla rhoncus risus lacinia volutpat. Duis tempor purus sed interdum hendrerit.',
-    href: '#',
-  },
+  }, */
 ]
 
-const VISIBLE = 3 // items visible at a time
-const ITEM_H = 132 // px — height of each item including divider
+const SLIDES: Slide[] = [
+  {
+    phrase: '¿Cómo generamos\nvalor sostenible?',
+    image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
+  },
+  {
+    phrase: 'Liderazgo ques\ntransforma\n organizaciones.',
+    image: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80',
+  },
+  {
+    phrase: 'Socio estratégico\nen busqueda\nejecutiva.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+  },
+  {
+    phrase: 'Soluciones\nde talento.',
+    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80',
+  },
+]
 
 // ─── Link Row ─────────────────────────────────────────────────────────────────
 
@@ -72,42 +78,28 @@ const LinkRow: React.FC<{ item: LinkItem }> = ({ item }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="group flex items-start justify-between gap-6 py-6 border-b border-gray-200 last:border-0 transition-all duration-200"
-      style={{ minHeight: ITEM_H }}
     >
       <div className="flex-1">
-        {/* Title */}
         <h3
-          className={`text-2xl font-light mb-2 transition-colors duration-200 ${
-            hovered ? 'text-green-800' : 'text-green-700'
-          }`}
+          className={`text-lg font-light mb-2 transition-colors duration-200 ${hovered ? 'text-green-800' : 'text-green-700'}`}
         >
           {item.title}
         </h3>
-
-        {/* Description */}
         <p
-          className={`text-md leading-relaxed transition-colors duration-200 ${
-            hovered ? 'text-gray-900' : 'text-gray-600'
-          }`}
+          className={`text-sm font-light leading-relaxed transition-colors duration-200 ${hovered ? 'text-gray-900' : 'text-gray-600'}`}
         >
           {item.description}
         </p>
       </div>
-
-      {/* Arrow */}
       <div
         className={`
-          flex-shrink-0 mt-1 w-8 h-8  flex items-center justify-center
-           transition-all duration-300
-          ${
-            hovered
-              ? 'border-green-600 text-primary scale-110'
-              : 'border-green-600 bg-transparent text-green-600 scale-100'
-          }
-        `}
+        flex-shrink-0 mt-1 w-8 h-8 rounded-full flex items-center justify-center border
+        transition-all duration-300
+        ${hovered ? 'border-green-600 bg-green-600 text-white scale-110' : 'border-green-600 bg-transparent text-green-600'}
+      `}
       >
         <svg
-          className={`w-6 h-6 transition-transform duration-300 ${hovered ? 'translate-x-0.5' : ''}`}
+          className={`w-4 h-4 transition-transform duration-300 ${hovered ? 'translate-x-0.5' : ''}`}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -133,13 +125,8 @@ const ArrowBtn: React.FC<{
     disabled={disabled}
     aria-label={direction === 'left' ? 'Anterior' : 'Siguiente'}
     className={`
-      w-11 h-11 border flex items-center justify-center
-      transition-all duration-200
-      ${
-        disabled
-          ? 'border-white/30 text-white/30 cursor-not-allowed'
-          : 'border-white/70 text-white hover:bg-white/15 hover:border-white'
-      }
+      w-11 h-11 border flex items-center justify-center transition-all duration-200
+      ${disabled ? 'border-white/30 text-white/30 cursor-not-allowed' : 'border-white/70 text-white hover:bg-white/15 hover:border-white'}
     `}
   >
     <svg
@@ -161,63 +148,73 @@ const ArrowBtn: React.FC<{
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 const GrowthLinks: React.FC = () => {
-  const [offset, setOffset] = useState(0)
-  const listRef = useRef<HTMLDivElement>(null)
+  const [current, setCurrent] = useState(0)
+  const [animKey, setAnimKey] = useState(0)
 
-  const maxOffset = LINKS.length - VISIBLE
+  const goTo = useCallback((next: number) => {
+    setCurrent(next)
+    setAnimKey((k) => k + 1)
+  }, [])
 
-  const scrollTo = useCallback(
-    (next: number) => {
-      const clamped = Math.max(0, Math.min(next, maxOffset))
-      setOffset(clamped)
-      if (listRef.current) {
-        listRef.current.scrollTo({ top: clamped * ITEM_H, behavior: 'smooth' })
-      }
-    },
-    [maxOffset],
-  )
+  const slide = SLIDES[current]
 
   return (
-    <section className="w-full py-16 px-6 lg:px-8 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[480px_1fr] gap-10 lg:gap-16 items-start">
-          {/* ── Left: green card (static) ── */}
-          <div className="bg-green-700 rounded-2xl p-10 flex flex-col justify-between min-h-[435px]">
-            <h2 className="text-white font-light text-4xl lg:text-4xl leading-tight">
-              How can we
-              <br />
-              empower your
-              <br />
-              growth?
-            </h2>
+    <>
+      {/* Keyframes injected once */}
+      <style>{`
+        @keyframes slideUpReveal {
+          from { transform: translateX(100%); opacity: 0; }
+          to   { transform: translateX(0);    opacity: 1; }
+        }
+        .slide-up-reveal {
+          animation: slideUpReveal 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+      `}</style>
 
-            {/* Arrows — bottom right of card */}
-            <div className="flex items-center gap-0 justify-end mt-8">
-              <ArrowBtn
-                direction="left"
-                onClick={() => scrollTo(offset - 1)}
-                disabled={offset === 0}
-              />
-              <ArrowBtn
-                direction="right"
-                onClick={() => scrollTo(offset + 1)}
-                disabled={offset >= maxOffset}
-              />
+      <section className="w-full py-16 page-padding bg-white">
+        <div>
+          <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-10 lg:gap-16 items-start">
+            {/* ── Left: phrase carousel card ── */}
+            <div className="relative rounded-2xl overflow-hidden min-h-[450px] flex flex-col justify-between">
+              {/* Background image — slides up on change */}
+              <div key={animKey} className="slide-up-reveal absolute inset-0 z-0">
+                <Image
+                  src={slide.image}
+                  alt=""
+                  fill
+                  className="object-cover object-center"
+                  sizes="480px"
+                />
+                {/* overlay so text stays readable */}
+                <div className="absolute inset-0 bg-primary/60" />
+              </div>
+
+              {/* Phrase text */}
+              <div className="relative z-10 p-10 flex-1 flex items-start">
+                <h2
+                  key={`phrase-${animKey}`}
+                  className="slide-up-reveal text-white font-light text-3xl lg:text-4xl leading-tight whitespace-pre-line"
+                >
+                  {slide.phrase}
+                </h2>
+              </div>
+
+              {/* Arrows */}
+              <div className="relative z-10 flex items-center gap-0 justify-end p-6">
+                <ArrowBtn
+                  direction="left"
+                  onClick={() => goTo((current - 1 + SLIDES.length) % SLIDES.length)}
+                />
+                <ArrowBtn direction="right" onClick={() => goTo((current + 1) % SLIDES.length)} />
+              </div>
             </div>
-          </div>
 
-          {/* ── Right: scrollable link list ── */}
-          <div>
-            {/* Section title */}
-            <h3 className="text-gray-900 font-medium text-2xl">Leadership Insights</h3>
-
-            {/* Clipping window — shows exactly VISIBLE items */}
-            <div className="overflow-hidden" style={{ height: VISIBLE * ITEM_H }}>
-              <div
-                ref={listRef}
-                className="overflow-y-auto h-full"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              >
+            {/* ── Right: fixed 3 links ── */}
+            <div>
+              <h3 className="text-gray-900 font-light text-2xl lg:text-3xl mb-2">
+                Conozca a profundidad CB Talent
+              </h3>
+              <div>
                 {LINKS.map((item) => (
                   <LinkRow key={item.id} item={item} />
                 ))}
@@ -225,8 +222,8 @@ const GrowthLinks: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
 

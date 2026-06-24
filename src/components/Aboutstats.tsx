@@ -80,16 +80,16 @@ const AboutStats: React.FC<AboutStatsProps> = ({ title, description, stats }) =>
   }, [])
 
   return (
-    <section className="w-full bg-white py-20 px-6 lg:px-8">
+    <section className="w-full bg-white py-20 page-padding">
       <div className="max-w-4xl mx-auto text-center">
         {/* Title */}
-        <h2 className="text-green-700 font-light text-3xl sm:text-4xl lg:text-5xl leading-tight">
+        <h2 className="text-green-700 font-light text-2xl lg:text-4xl leading-tight">
           {title}
         </h2>
         <br />
 
         {/* Description */}
-        <p className="mt-8 text-gray-800 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">
+        <p className="mt-8 text-gray-800 text-base lg:text-lg font-light leading-relaxed max-w-3xl mx-auto">
           {description}
         </p>
         <br />

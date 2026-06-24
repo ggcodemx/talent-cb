@@ -2,20 +2,13 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-
-export interface HeroButton {
-  label: string
-  href: string
-}
 
 export interface HeroSlide {
   id?: string
   heading: string
   subheading?: string
-  buttons?: HeroButton[]
   image: {
     url: string
     alt?: string
@@ -65,7 +58,7 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ slides, autoplayInterval = 
 
   return (
     <section
-      className="relative w-full h-screen min-h-[600px] overflow-hidden "
+      className="relative w-full h-screen min-h-[600px] overflow-hidden"
       aria-label="Hero carousel"
     >
       {/* ── Slides (background images) ── */}
@@ -92,98 +85,61 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ slides, autoplayInterval = 
       ))}
 
       {/* ── Content ── */}
-      <div className="relative z-20 h-full flex items-center">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-          <div className="max-w-2xl">
-            {/* Heading */}
-            <h1
-              key={`heading-${current}`}
+      <div className="relative z-20 h-full flex items-center page-padding">
+        <div className="max-w-2xl">
+          {/* Heading */}
+          <h1
+            key={`heading-${current}`}
+            className="
+              text-white font-light leading-tight
+              text-3xl sm:text-4xl lg:text-5xl
+              animate-fade-up
+            "
+          >
+            {slide.heading}
+          </h1>
+
+          {/* Subheading */}
+          {slide.subheading && (
+            <p
+              key={`sub-${current}`}
               className="
-                text-white font-light leading-tight
-                text-4xl sm:text-5xl lg:text-6xl
-                animate-fade-up
+                mt-4 text-white/85 text-base sm:text-lg leading-relaxed font-light
+                max-w-xl animate-fade-up animation-delay-150
               "
             >
-              {slide.heading}
-            </h1>
+              {slide.subheading}
+            </p>
+          )}
 
-            {/* Subheading */}
-            {slide.subheading && (
-              <p
-                key={`sub-${current}`}
-                className="
-                  mt-4 text-white/85 text-base sm:text-lg leading-relaxed
-                  max-w-xl animate-fade-up animation-delay-150
-                "
-              >
-                {slide.subheading}
-              </p>
-            )}
-
-            {/* Buttons */}
-            {slide.buttons && slide.buttons.length > 0 && (
-              <div
-                key={`btns-${current}`}
-                className="mt-8 flex flex-wrap gap-4 animate-fade-up animation-delay-300"
-              >
-                {slide.buttons.map((btn, bi) => (
-                  <Link
-                    key={bi}
-                    href={btn.href}
-                    className="
-                      inline-flex items-center px-6 py-3
-                      bg-secondary hover:bg-green-700
-                      text-white text-sm font-light
-                       transition-colors duration-200
-                      focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-transparent
-                    "
-                  >
-                    {btn.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+          {/* Decorative line */}
+          <div
+            key={`line-${current}`}
+            className="mt-8 h-[3px] w-40 bg-primary animate-fade-up animation-delay-300"
+          />
         </div>
       </div>
 
-      {/* ── Dots indicator ── */}
+      {/* ── Bottom-right arrow controls ── */}
       {total > 1 && (
-        <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center gap-2">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              aria-label={`Ir al slide ${i + 1}`}
-              className={`
-                rounded-full transition-all duration-300
-                ${i === current ? 'bg-white w-6 h-2' : 'bg-white/40 hover:bg-white/70 w-2 h-2'}
-              `}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* ── Arrow controls ── */}
-      {total > 1 && (
-        <>
+        <div className="absolute bottom-8 right-6 md:right-12 lg:right-[200px] z-20 flex gap-3">
           <button
             onClick={() => goTo((current - 1 + total) % total)}
             aria-label="Slide anterior"
             className="
-              absolute left-4 top-1/2 -translate-y-1/2 z-20
-              w-10 h-10 rounded-full bg-white/20 hover:bg-white/40
+              w-9 h-9 border border-white/70 hover:border-white
+              bg-black/20 hover:bg-black/40
               flex items-center justify-center
-              text-white transition-colors duration-200
-              focus:outline-none focus:ring-2 focus:ring-white/50
+              text-white transition-all duration-200
+              focus:outline-none
             "
           >
             <svg
-              className="w-5 h-5"
+              className="w-4 h-4"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth={2.5}
+              strokeWidth={2}
             >
               <polyline points="15 18 9 12 15 6" />
             </svg>
@@ -193,24 +149,24 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ slides, autoplayInterval = 
             onClick={() => goTo((current + 1) % total)}
             aria-label="Siguiente slide"
             className="
-              absolute right-4 top-1/2 -translate-y-1/2 z-20
-              w-10 h-10 rounded-full bg-white/20 hover:bg-white/40
+              w-9 h-9 border border-white/70 hover:border-white
+              bg-black/20 hover:bg-black/40
               flex items-center justify-center
-              text-white transition-colors duration-200
-              focus:outline-none focus:ring-2 focus:ring-white/50
+              text-white transition-all duration-200
+              focus:outline-none
             "
           >
             <svg
-              className="w-5 h-5"
+              className="w-4 h-4"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth={2.5}
+              strokeWidth={2}
             >
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </button>
-        </>
+        </div>
       )}
     </section>
   )

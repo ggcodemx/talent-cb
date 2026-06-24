@@ -1,134 +1,204 @@
-/**
- * ============================================================
- * globals/AboutPage.ts — Página "Nosotros / Quiénes Somos"
- * ============================================================
- */
-
 import type { GlobalConfig } from 'payload'
 
-export const AboutPage: GlobalConfig = {
-  slug: 'about-page',
-  label: '🏢 Página Nosotros',
-
-  admin: {
-    group: '🌐 Páginas',
-    description: 'Edita el contenido de la página /nosotros.',
-  },
-
+export const AboutPageGlobal: GlobalConfig = {
+  slug: 'page-about',
+  label: ' Página: About',
+  access: { read: () => true },
   fields: [
+    // ─── Hero ──────────────────────────────────────────────────────────────
     {
       name: 'hero',
-      label: 'Hero de la página',
       type: 'group',
-      fields: [
-        {
-          name: 'heading',
-          label: 'Título',
-          type: 'text',
-          defaultValue: 'Nuestra Firma',
-        },
-        {
-          name: 'subheading',
-          label: 'Subtítulo',
-          type: 'textarea',
-        },
-        {
-          name: 'image',
-          label: 'Imagen del hero',
-          type: 'upload',
-          relationTo: 'media',
-          admin: { description: 'Foto de la oficina o equipo completo. Recomendado: 1200×600px.' },
-        },
-      ],
-    },
-    {
-      name: 'story',
-      label: 'Historia de la firma',
-      type: 'group',
+      label: 'Hero',
       fields: [
         {
           name: 'title',
-          label: 'Título de la sección',
           type: 'text',
-          defaultValue: 'Nuestra historia',
-        },
-        {
-          name: 'content',
-          label: 'Historia',
-          type: 'richText',
-          admin: {
-            description: 'Cuenta la historia de la firma: cuándo se fundó, misión, valores.',
-          },
-        },
-        {
-          name: 'image',
-          label: 'Imagen de la sección',
-          type: 'upload',
-          relationTo: 'media',
-        },
-      ],
-    },
-    {
-      name: 'values',
-      label: 'Valores de la firma',
-      type: 'array',
-      maxRows: 6,
-      fields: [
-        {
-          name: 'icon',
-          label: 'Ícono',
-          type: 'text',
-          admin: { placeholder: '🎯' },
-        },
-        {
-          name: 'title',
-          label: 'Valor',
-          type: 'text',
-          admin: { placeholder: 'Integridad' },
+          label: 'Título (izquierda)',
+          required: true,
+          defaultValue: 'About Us',
         },
         {
           name: 'description',
-          label: 'Descripción',
           type: 'textarea',
+          label: 'Descripción (derecha)',
+          required: true,
         },
       ],
     },
+
+    // ─── Split Image + Blocks ───────────────────────────────────────────────
     {
-      name: 'certifications',
-      label: 'Certificaciones y membresías',
+      name: 'split',
+      type: 'group',
+      label: 'Sección: Imagen + Bloques',
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Imagen (izquierda)',
+          required: true,
+        },
+        {
+          name: 'blockOne',
+          type: 'group',
+          label: 'Bloque superior (derecha)',
+          fields: [
+            { name: 'title', type: 'text', label: 'Título', required: true },
+            { name: 'description', type: 'textarea', label: 'Descripción', required: true },
+          ],
+        },
+        {
+          name: 'blockTwo',
+          type: 'group',
+          label: 'Bloque inferior (derecha)',
+          fields: [
+            { name: 'title', type: 'text', label: 'Título', required: true },
+            { name: 'description', type: 'textarea', label: 'Descripción', required: true },
+          ],
+        },
+      ],
+    },
+
+    {
+      name: 'services',
       type: 'array',
+      label: '③ Servicios (bloque interactivo)',
+      minRows: 1,
+      maxRows: 6,
+      labels: {
+        singular: 'Servicio',
+        plural: 'Servicios',
+      },
       admin: {
         description:
-          'Logos de asociaciones, certificaciones o premios. Recomendado: PNG transparente 200×100px.',
+          'Cada servicio aparece como un link en el lado izquierdo. Al hacer clic muestra su imagen, tag, título y descripción en el lado derecho.',
       },
       fields: [
         {
-          name: 'logo',
-          label: 'Logo',
+          name: 'title',
+          type: 'text',
+          label: 'Título del servicio',
+          required: true,
+          admin: {
+            description: 'Aparece en el menú izquierdo y como título del panel derecho.',
+          },
+        },
+        {
+          name: 'tag',
+          type: 'text',
+          label: 'Tag / Categoría',
+          required: true,
+          admin: {
+            description:
+              'Texto pequeño verde que aparece arriba del título. Ej: "Integration", "Strategy".',
+          },
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          label: 'Descripción',
+          required: true,
+        },
+        {
+          name: 'image',
           type: 'upload',
           relationTo: 'media',
-        },
-        {
-          name: 'name',
-          label: 'Nombre de la certificación',
-          type: 'text',
-          admin: { placeholder: 'Miembro del IMCP' },
-        },
-        {
-          name: 'url',
-          label: 'URL (opcional)',
-          type: 'text',
+          label: 'Imagen del servicio',
+          required: true,
         },
       ],
     },
+
     {
-      name: 'seo',
-      label: 'SEO',
+      name: 'cards',
       type: 'group',
+      label: '④ Cards con links (fondo verde)',
       fields: [
-        { name: 'metaTitle', label: 'Título SEO', type: 'text' },
-        { name: 'metaDescription', label: 'Meta descripción', type: 'textarea', maxLength: 160 },
+        {
+          name: 'eyebrow',
+          type: 'text',
+          label: 'Texto pequeño superior',
+          defaultValue: 'How we help clients',
+          admin: { description: 'Texto pequeño que aparece arriba del título principal.' },
+        },
+        {
+          name: 'heading',
+          type: 'text',
+          label: 'Título principal',
+          required: true,
+          defaultValue: "Let's turn your biggest opportunities into your next big moves.",
+        },
+        {
+          name: 'items',
+          type: 'array',
+          label: 'Cards',
+          minRows: 3,
+          maxRows: 3,
+          labels: { singular: 'Card', plural: 'Cards' },
+          admin: {
+            description:
+              'Exactamente 3 cards. Cada una lleva al usuario a una sección de la página.',
+          },
+          fields: [
+            { name: 'title', type: 'text', label: 'Título de la card', required: true },
+            { name: 'description', type: 'textarea', label: 'Descripción breve', required: true },
+            {
+              name: 'href',
+              type: 'text',
+              label: 'Enlace (URL o ruta)',
+              required: true,
+              admin: { description: 'Ej: /services, /contact, #servicios' },
+            },
+            {
+              name: 'image',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Imagen de la card',
+              required: true,
+            },
+          ],
+        },
       ],
     },
+
+    // ─── Desks Internacionales ─────────────────────────────────────────────
+    {
+      name: 'desks',
+      type: 'array',
+      label: '⑤ Desks Internacionales',
+      minRows: 1,
+      maxRows: 8,
+      labels: { singular: 'Desk', plural: 'Desks' },
+      admin: {
+        description:
+          'Cada desk aparece en la lista izquierda. Al hacer hover cambia la imagen y descripción a la derecha.',
+      },
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          label: 'Nombre del desk',
+          required: true,
+          admin: { description: 'Ej: Desk Asiático, Desk Norteamericano…' },
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          label: 'Descripción',
+          required: true,
+        },
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Imagen representativa',
+          required: true,
+        },
+      ],
+    },
+
+    // Cards CTA
   ],
 }
