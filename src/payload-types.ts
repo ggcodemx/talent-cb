@@ -88,10 +88,26 @@ export interface Config {
   };
   fallbackLocale: null;
   globals: {
-    hero: Hero;
+    navbar: Navbar;
+    'page-home': PageHome;
+    'page-about': PageAbout;
+    'page-contact': PageContact;
+    'page-industries': PageIndustry;
+    'page-services': PageService;
+    'page-blog': PageBlog;
+    'page-liderazgo': PageLiderazgo;
+    'page-careers': PageCareer;
   };
   globalsSelect: {
-    hero: HeroSelect<false> | HeroSelect<true>;
+    navbar: NavbarSelect<false> | NavbarSelect<true>;
+    'page-home': PageHomeSelect<false> | PageHomeSelect<true>;
+    'page-about': PageAboutSelect<false> | PageAboutSelect<true>;
+    'page-contact': PageContactSelect<false> | PageContactSelect<true>;
+    'page-industries': PageIndustriesSelect<false> | PageIndustriesSelect<true>;
+    'page-services': PageServicesSelect<false> | PageServicesSelect<true>;
+    'page-blog': PageBlogSelect<false> | PageBlogSelect<true>;
+    'page-liderazgo': PageLiderazgoSelect<false> | PageLiderazgoSelect<true>;
+    'page-careers': PageCareersSelect<false> | PageCareersSelect<true>;
   };
   locale: null;
   widgets: {
@@ -321,17 +337,135 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "hero".
+ * via the `definition` "navbar".
  */
-export interface Hero {
+export interface Navbar {
   id: string;
-  slides?:
+  logo?: (string | null) | Media;
+  items?:
     | {
-        titulo: string;
-        subtitulo?: string | null;
-        botonTexto?: string | null;
-        botonUrl?: string | null;
-        imagenFondo: string | Media;
+        label: string;
+        href?: string | null;
+        children?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  showSearch?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-home".
+ */
+export interface PageHome {
+  id: string;
+  hero?: {
+    slides?:
+      | {
+          image: string | Media;
+          heading: string;
+          subheading?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    autoplayInterval?: number | null;
+  };
+  aboutStats: {
+    title: string;
+    description?: string | null;
+    stats?:
+      | {
+          number: string;
+          label: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  expertiseBlock: {
+    image: string | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-about".
+ */
+export interface PageAbout {
+  id: string;
+  hero: {
+    title: string;
+    description: string;
+  };
+  split: {
+    image: string | Media;
+    blockOne: {
+      title: string;
+      description: string;
+    };
+    blockTwo: {
+      title: string;
+      description: string;
+    };
+  };
+  /**
+   * Cada servicio aparece como un link en el lado izquierdo. Al hacer clic muestra su imagen, tag, título y descripción en el lado derecho.
+   */
+  services?:
+    | {
+        /**
+         * Aparece en el menú izquierdo y como título del panel derecho.
+         */
+        title: string;
+        /**
+         * Texto pequeño verde que aparece arriba del título. Ej: "Integration", "Strategy".
+         */
+        tag: string;
+        description: string;
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  cards: {
+    /**
+     * Texto pequeño que aparece arriba del título principal.
+     */
+    eyebrow?: string | null;
+    heading: string;
+    /**
+     * Exactamente 3 cards. Cada una lleva al usuario a una sección de la página.
+     */
+    items?:
+      | {
+          title: string;
+          description: string;
+          /**
+           * Ej: /services, /contact, #servicios
+           */
+          href: string;
+          image: string | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Cada desk aparece en la lista izquierda. Al hacer hover cambia la imagen y descripción a la derecha.
+   */
+  desks?:
+    | {
+        /**
+         * Ej: Desk Asiático, Desk Norteamericano…
+         */
+        title: string;
+        description: string;
+        image: string | Media;
         id?: string | null;
       }[]
     | null;
@@ -340,17 +474,623 @@ export interface Hero {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "hero_select".
+ * via the `definition` "page-contact".
  */
-export interface HeroSelect<T extends boolean = true> {
-  slides?:
+export interface PageContact {
+  id: string;
+  hero: {
+    title: string;
+    description: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-industries".
+ */
+export interface PageIndustry {
+  id: string;
+  hero: {
+    title: string;
+    description: string;
+  };
+  /**
+   * Cada industria aparece en la lista derecha. Al hacer hover muestra su nombre, descripción e imagen en el panel izquierdo.
+   */
+  industries?:
+    | {
+        /**
+         * Ej: Consumer Products and Services
+         */
+        name: string;
+        /**
+         * Texto corto que aparece bajo el título en el panel izquierdo.
+         */
+        description: string;
+        /**
+         * Ej: /industries/technology
+         */
+        href: string;
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  cards: {
+    /**
+     * Texto pequeño que aparece arriba del título principal.
+     */
+    eyebrow?: string | null;
+    heading: string;
+    /**
+     * Exactamente 3 cards. Cada una lleva al usuario a una sección de la página.
+     */
+    items?:
+      | {
+          title: string;
+          description: string;
+          /**
+           * Ej: /services, /contact, #servicios
+           */
+          href: string;
+          image: string | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-services".
+ */
+export interface PageService {
+  id: string;
+  hero: {
+    title: string;
+    description: string;
+  };
+  /**
+   * Cada servicio aparece en la lista derecha. Al hacer hover muestra su nombre, descripción e imagen en el panel izquierdo.
+   */
+  services?:
+    | {
+        /**
+         * Ej: Consumer Products and Services
+         */
+        name: string;
+        /**
+         * Texto corto que aparece bajo el título en el panel izquierdo.
+         */
+        description: string;
+        /**
+         * Ej: /services/technology
+         */
+        href: string;
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  cards: {
+    /**
+     * Texto pequeño que aparece arriba del título principal.
+     */
+    eyebrow?: string | null;
+    heading: string;
+    /**
+     * Exactamente 3 cards. Cada una lleva al usuario a una sección de la página.
+     */
+    items?:
+      | {
+          title: string;
+          description: string;
+          /**
+           * Ej: /services, /contact, #servicios
+           */
+          href: string;
+          image: string | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-blog".
+ */
+export interface PageBlog {
+  id: string;
+  hero: {
+    title: string;
+    description: string;
+  };
+  expertiseBlock: {
+    image: string | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-liderazgo".
+ */
+export interface PageLiderazgo {
+  id: string;
+  hero: {
+    title: string;
+    description: string;
+  };
+  split: {
+    /**
+     * Aparece en blanco sobre el fondo verde.
+     */
+    title: string;
+    /**
+     * Puedes usar saltos de línea para separar párrafos. Cada línea en blanco crea un nuevo párrafo.
+     */
+    body: string;
+    image: string | Media;
+  };
+  highlight: {
+    /**
+     * Ej: Nuestro compromiso, Nuestra filosofía…
+     */
+    eyebrow?: string | null;
+    title: string;
+    /**
+     * Usa saltos de línea para separar párrafos.
+     */
+    description: string;
+    image: string | Media;
+  };
+  /**
+   * Dos cards cuadradas con efecto flip al hacer hover. La izquierda tiene overlay negro y la derecha overlay verde.
+   */
+  flipCards: {
+    cardLeft: {
+      title: string;
+      description: string;
+      image: string | Media;
+    };
+    cardRight: {
+      title: string;
+      description: string;
+      image: string | Media;
+    };
+  };
+  /**
+   * Cada valor aparece en la lista izquierda. Al hacer hover cambia la imagen y descripción a la derecha.
+   */
+  values?:
+    | {
+        /**
+         * Ej: Valor de integridad, Valor de innovación…
+         */
+        title: string;
+        description: string;
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-careers".
+ */
+export interface PageCareer {
+  id: string;
+  hero: {
+    title: string;
+    description: string;
+  };
+  split: {
+    /**
+     * Aparece en blanco sobre el fondo verde.
+     */
+    title: string;
+    /**
+     * Puedes usar saltos de línea para separar párrafos. Cada línea en blanco crea un nuevo párrafo.
+     */
+    body: string;
+    image: string | Media;
+  };
+  highlight: {
+    /**
+     * Ej: Nuestro compromiso, Nuestra filosofía…
+     */
+    eyebrow?: string | null;
+    title: string;
+    /**
+     * Usa saltos de línea para separar párrafos.
+     */
+    description: string;
+    image: string | Media;
+  };
+  /**
+   * Dos cards cuadradas con efecto flip al hacer hover. La izquierda tiene overlay negro y la derecha overlay verde.
+   */
+  flipCards: {
+    cardLeft: {
+      title: string;
+      description: string;
+      image: string | Media;
+    };
+    cardRight: {
+      title: string;
+      description: string;
+      image: string | Media;
+    };
+  };
+  /**
+   * Cada valor aparece en la lista izquierda. Al hacer hover cambia la imagen y descripción a la derecha.
+   */
+  values?:
+    | {
+        /**
+         * Ej: Valor de integridad, Valor de innovación…
+         */
+        title: string;
+        description: string;
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navbar_select".
+ */
+export interface NavbarSelect<T extends boolean = true> {
+  logo?: T;
+  items?:
     | T
     | {
-        titulo?: T;
-        subtitulo?: T;
-        botonTexto?: T;
-        botonUrl?: T;
-        imagenFondo?: T;
+        label?: T;
+        href?: T;
+        children?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  showSearch?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-home_select".
+ */
+export interface PageHomeSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        slides?:
+          | T
+          | {
+              image?: T;
+              heading?: T;
+              subheading?: T;
+              id?: T;
+            };
+        autoplayInterval?: T;
+      };
+  aboutStats?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        stats?:
+          | T
+          | {
+              number?: T;
+              label?: T;
+              id?: T;
+            };
+      };
+  expertiseBlock?:
+    | T
+    | {
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-about_select".
+ */
+export interface PageAboutSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  split?:
+    | T
+    | {
+        image?: T;
+        blockOne?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+            };
+        blockTwo?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+            };
+      };
+  services?:
+    | T
+    | {
+        title?: T;
+        tag?: T;
+        description?: T;
+        image?: T;
+        id?: T;
+      };
+  cards?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              href?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  desks?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-contact_select".
+ */
+export interface PageContactSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-industries_select".
+ */
+export interface PageIndustriesSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  industries?:
+    | T
+    | {
+        name?: T;
+        description?: T;
+        href?: T;
+        image?: T;
+        id?: T;
+      };
+  cards?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              href?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-services_select".
+ */
+export interface PageServicesSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  services?:
+    | T
+    | {
+        name?: T;
+        description?: T;
+        href?: T;
+        image?: T;
+        id?: T;
+      };
+  cards?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              href?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-blog_select".
+ */
+export interface PageBlogSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  expertiseBlock?:
+    | T
+    | {
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-liderazgo_select".
+ */
+export interface PageLiderazgoSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  split?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        image?: T;
+      };
+  highlight?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  flipCards?:
+    | T
+    | {
+        cardLeft?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
+        cardRight?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
+      };
+  values?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-careers_select".
+ */
+export interface PageCareersSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  split?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        image?: T;
+      };
+  highlight?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  flipCards?:
+    | T
+    | {
+        cardLeft?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
+        cardRight?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
+      };
+  values?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
         id?: T;
       };
   updatedAt?: T;
