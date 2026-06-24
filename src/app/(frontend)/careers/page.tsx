@@ -27,9 +27,9 @@ export default async function CareersPage() {
           body: pageAny.split.body,
           image: {
             url:
-              typeof pageAny.split.image === 'object'
+              (typeof pageAny.split.image === 'object'
                 ? pageAny.split.image.url
-                : pageAny.split.image,
+                : pageAny.split.image) ?? '',
             alt: typeof pageAny.split.image === 'object' ? (pageAny.split.image.alt ?? '') : '',
           },
         }
@@ -45,9 +45,9 @@ export default async function CareersPage() {
           description: pageAny.highlight.description,
           image: {
             url:
-              typeof pageAny.highlight.image === 'object'
+              (typeof pageAny.highlight.image === 'object'
                 ? pageAny.highlight.image.url
-                : pageAny.highlight.image,
+                : pageAny.highlight.image) ?? '',
             alt:
               typeof pageAny.highlight.image === 'object'
                 ? (pageAny.highlight.image.alt ?? '')
@@ -65,10 +65,9 @@ export default async function CareersPage() {
             title: pageAny.flipCards.cardLeft.title,
             description: pageAny.flipCards.cardLeft.description ?? '',
             image: {
-              url:
-                typeof pageAny.flipCards.cardLeft.image === 'object'
+              url: (typeof pageAny.flipCards.cardLeft.image === 'object'
                   ? pageAny.flipCards.cardLeft.image.url
-                  : pageAny.flipCards.cardLeft.image,
+                  : pageAny.flipCards.cardLeft.image) ?? '',
               alt:
                 typeof pageAny.flipCards.cardLeft.image === 'object'
                   ? (pageAny.flipCards.cardLeft.image.alt ?? '')
@@ -79,10 +78,9 @@ export default async function CareersPage() {
             title: pageAny.flipCards.cardRight.title,
             description: pageAny.flipCards.cardRight.description ?? '',
             image: {
-              url:
-                typeof pageAny.flipCards.cardRight.image === 'object'
+              url: (typeof pageAny.flipCards.cardRight.image === 'object'
                   ? pageAny.flipCards.cardRight.image.url
-                  : pageAny.flipCards.cardRight.image,
+                  : pageAny.flipCards.cardRight.image) ?? '',
               alt:
                 typeof pageAny.flipCards.cardRight.image === 'object'
                   ? (pageAny.flipCards.cardRight.image.alt ?? '')

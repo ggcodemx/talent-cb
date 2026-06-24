@@ -21,10 +21,9 @@ export default async function BlogPage() {
   const expertiseData: ExpertiseBlockProps | null = page?.expertiseBlock?.image
     ? {
         image: {
-          url:
-            typeof page.expertiseBlock.image === 'object'
+          url: (typeof page.expertiseBlock.image === 'object'
               ? page.expertiseBlock.image.url
-              : page.expertiseBlock.image,
+              : page.expertiseBlock.image) ?? '',
           alt:
             typeof page.expertiseBlock.image === 'object'
               ? (page.expertiseBlock.image.alt ?? '')
