@@ -15,7 +15,7 @@ export const Contacto: CollectionConfig = {
   },
   fields: [
     { name: 'nombre', type: 'text', label: 'Nombre', required: true },
-    { name: 'email', type: 'email', label: 'Correo electrónico', required: true },
+    { name: 'email', type: 'email', label: 'Email', required: true },
     { name: 'telefono', type: 'text', label: 'Teléfono' },
     { name: 'empresa', type: 'text', label: 'Empresa' },
     { name: 'mensaje', type: 'textarea', label: 'Mensaje', required: true },
