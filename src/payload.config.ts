@@ -1,5 +1,6 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
 import dotenv from 'dotenv'
 import { buildConfig } from 'payload'
@@ -8,7 +9,6 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import { Contacto } from './collections/Contacto'
 
 // ── Globales (contenido único: header, footer, ajustes) ──────
 import { NavbarGlobal } from './globals/NavbarGlobal'
@@ -35,7 +35,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Contacto],
+  collections: [Users, Media],
   // ── Globales registrados ────────────────────────────────────
   globals: [
     NavbarGlobal,
@@ -55,8 +55,22 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: mongooseAdapter({
-    url: process.env.DATABASE_URL || 'mongodb://127.0.0.1:27017/cb-talent',
+    url: process.env.DATABASE_URI || 'mongodb://127.0.0.1:27017/cb-talent',
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    s3Storage({
+      collections: {
+        media: true,
+      },
+      bucket: process.env.S3_BUCKET || '',
+      config: {
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+        },
+        region: process.env.S3_REGION || 'us-east-1',
+      },
+    }),
+  ],
 })
