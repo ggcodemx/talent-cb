@@ -61,7 +61,9 @@ export default buildConfig({
   plugins: [
     s3Storage({
       collections: {
-        media: true,
+        media: {
+          prefix: 'cb-talent',
+        },
       },
       bucket: process.env.S3_BUCKET || '',
       config: {
