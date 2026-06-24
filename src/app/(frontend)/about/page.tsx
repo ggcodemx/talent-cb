@@ -26,7 +26,7 @@ export default async function AboutPage() {
     page?.split?.image && page?.split?.blockOne && page?.split?.blockTwo
       ? {
           image: {
-            url: typeof page.split.image === 'object' ? page.split.image.url : page.split.image,
+            url: (typeof page.split.image === 'object' ? page.split.image.url : page.split.image) ?? '',
             alt: typeof page.split.image === 'object' ? (page.split.image.alt ?? '') : '',
           },
           blocks: [
@@ -50,7 +50,7 @@ export default async function AboutPage() {
           tag: s.tag,
           description: s.description,
           image: {
-            url: typeof s.image === 'object' ? s.image.url : s.image,
+            url: (typeof s.image === 'object' ? s.image.url : s.image) ?? '',
             alt: typeof s.image === 'object' ? (s.image.alt ?? '') : '',
           },
         })),
@@ -65,7 +65,7 @@ export default async function AboutPage() {
           title: d.title,
           description: d.description,
           image: {
-            url: typeof d.image === 'object' ? d.image.url : d.image,
+            url: (typeof d.image === 'object' ? d.image.url : d.image) ?? '',
             alt: typeof d.image === 'object' ? (d.image.alt ?? '') : '',
           },
         })),
@@ -83,7 +83,7 @@ export default async function AboutPage() {
             description: c.description,
             href: c.href,
             image: {
-              url: typeof c.image === 'object' ? c.image.url : c.image,
+              url: (typeof c.image === 'object' ? c.image.url : c.image) ?? '',
               alt: typeof c.image === 'object' ? (c.image.alt ?? '') : '',
             },
           })) as AboutCardsProps['cards'],

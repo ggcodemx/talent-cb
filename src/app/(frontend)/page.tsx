@@ -30,7 +30,7 @@ export default async function HomePage() {
     heading: s.heading,
     subheading: s.subheading ?? undefined,
     image: {
-      url: typeof s.image === 'object' ? s.image.url : s.image,
+      url: (typeof s.image === 'object' ? s.image.url : s.image) ?? '',
       alt: typeof s.image === 'object' ? (s.image.alt ?? '') : '',
     },
   }))

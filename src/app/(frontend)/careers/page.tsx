@@ -100,7 +100,7 @@ export default async function CareersPage() {
           title: d.title,
           description: d.description,
           image: {
-            url: typeof d.image === 'object' ? d.image.url : d.image,
+            url: (typeof d.image === 'object' ? d.image.url : d.image) ?? '',
             alt: typeof d.image === 'object' ? (d.image.alt ?? '') : '',
           },
         })),

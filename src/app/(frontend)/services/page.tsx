@@ -25,7 +25,7 @@ export default async function Services() {
           description: ind.description,
           href: ind.href,
           image: {
-            url: typeof ind.image === 'object' ? ind.image.url : ind.image,
+            url: (typeof ind.image === 'object' ? ind.image.url : ind.image) ?? '',
             alt: typeof ind.image === 'object' ? (ind.image.alt ?? '') : '',
           },
         })),
@@ -43,7 +43,7 @@ export default async function Services() {
             description: c.description,
             href: c.href,
             image: {
-              url: typeof c.image === 'object' ? c.image.url : c.image,
+              url: (typeof c.image === 'object' ? c.image.url : c.image) ?? '',
               alt: typeof c.image === 'object' ? (c.image.alt ?? '') : '',
             },
           })) as AboutCardsProps['cards'],
